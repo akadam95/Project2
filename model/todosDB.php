@@ -51,3 +51,13 @@ function newTask($email, $ownerID, $duedate, $message) {
     $statement->execute();
     $statement->closeCursor();
 }
+
+function taskCompleted($id) {
+    global $db;
+    $query = 'UPDATE todos SET isdone = :isdone WHERE id = :id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(":isdone", 1);
+    $statement->bindValue(":id", $id);
+    $statement->execute();
+    $statement->closeCursor();
+}
