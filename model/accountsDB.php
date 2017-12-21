@@ -52,8 +52,8 @@ function getLname($email, $password) {
     $statement->execute();
     $lnames = $statement->fetch();
     $statement->closeCursor();
-    $lnames = $account['lname'];
+    $lname = $lnames['lname'];
     return $lnames;
 }
 
-?
+?>

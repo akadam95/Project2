@@ -3,10 +3,10 @@
     <h1>Menu</h1>
     <ul>
         <li>
-            <a href="product_manager">Product Manager</a>
+            <a href="controller/login.php">Login</a>
         </li>
         <li>
-            <a href="product_catalog">Product Catalog</a>
+            <a href="controller/register.php">Register</a>
         </li>
     </ul>
 </main>

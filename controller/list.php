@@ -1,6 +1,6 @@
 <?php include '../view/header.php'; ?>
 <main>
-    <h2><?php echo "$fname $lname's To-Do List" ?></h2>
+    <h2><?php echo "$fname $lname's To-Do List"; ?></h2>
 
     <section>
         <!-- display a table of incomplete todos -->
@@ -15,7 +15,11 @@
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
-            <?php foreach ($todos as $todo) {
+            <?php foreach ($todos as $todo) :
+            
+              $duedate = $todo['duedate'];
+              $message = $todo['message'];
+              $id = $todo['id'];
             	if ($todo['isdone'] == 1) {
             		continue;
             	}
@@ -28,34 +32,34 @@
 		                    <input type="hidden" name="action"
 		                           value="todo_form">
 		                    <input type="hidden" name="todo_id"
-		                           value="<?php echo $todo['id']; ?>">
+		                           value="<?php echo $id; ?>">
                             <input type="hidden" name="todo_duedate"
-                                   value="<?php echo $todo['duedate']; ?>">
+                                   value="<?php echo $duedate; ?>">
                             <input type="hidden" name="todo_message"
-                                   value="<?php echo $todo['message']; ?>">
+                                   value="<?php echo $message; ?>">
 		                    <input type="submit" value="Edit">
 		                </form></td>
 		                <td><form action="." method="post">
 		                    <input type="hidden" name="action"
 		                           value="delete_todo">
 		                    <input type="hidden" name="todo_id"
-		                           value="<?php echo $todo['id']; ?>">
+		                           value="<?php echo $id; ?>">
 		                    <input type="hidden" name="todo_duedate"
-		                           value="<?php echo $todo['duedate']; ?>">
+		                           value="<?php echo $duedate; ?>">
 		                    <input type="hidden" name="todo_message"
-		                           value="<?php echo $todo['message']; ?>">
+		                           value="<?php echo $message; ?>">
 		                    <input type="submit" value="Delete">
 		                </form></td>
 		                <td><form action="." method="post">
 		                    <input type="hidden" name="action"
 		                           value="complete">
 		                    <input type="hidden" name="todo_id"
-		                           value="<?php echo $todo['id']; ?>">
+		                           value="<?php echo $id; ?>">
 		                    <input type="submit" value="Complete">
 		                </form></td>
 		            </tr>
 		    <?php }
-            } ?>
+            endforeach; ?>
         </table>     
     </section>
     <section>
@@ -70,7 +74,7 @@
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
-            <?php foreach ($todos as $todo) {
+            <?php foreach ($todos as $todo):
             	if ($todo['isdone'] == 0) {
             		continue;
             	}
@@ -81,7 +85,7 @@
 		                <td class="message"><?php echo $todo['message']; ?></td>
 		            </tr>
 		    <?php }
-            } ?>
+            endforeach; ?>
         </table>     
     </section>
 </main>
