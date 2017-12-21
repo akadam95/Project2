@@ -14,4 +14,18 @@ function newAccount($email, $fname, $lname, $phone, $birthday, $gender, $passwor
     $statement->closeCursor();
 }
 
+function getID($email, $password) {
+    global $db;
+    $query = 'SELECT * FROM accounts
+              WHERE email = :email AND password = :password';
+    $statement = $db->prepare($query);
+    $statement->bindValue(":email", $email);
+    $statement->bindValue(":password", $password);
+    $statement->execute();
+    $table = $statement->fetch();
+    $statement->closeCursor();
+    $id = $table['id'];
+    return $id;
+}
+
 ?
