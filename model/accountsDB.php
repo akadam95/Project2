@@ -28,4 +28,18 @@ function getID($email, $password) {
     return $id;
 }
 
+function getFname($email, $password) {
+    global $db;
+    $query = 'SELECT * FROM accounts
+              WHERE email = :email AND password = :password';
+    $statement = $db->prepare($query);
+    $statement->bindValue(":email", $email);
+    $statement->bindValue(":password", $password);
+    $statement->execute();
+    $fnames = $statement->fetch();
+    $statement->closeCursor();
+    $fname = $fnames['fname'];
+    return $fname;
+}
+
 ?
