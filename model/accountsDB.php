@@ -1,14 +1,17 @@
 <?php 
-function getOwnerID($ownerID) {
+function newAccount($email, $fname, $lname, $phone, $birthday, $gender, $password) {
     global $db;
-    $query = 'SELECT * FROM todos
-              WHERE ownerid = :ownerID
-              ORDER BY createddate DESC';
+    $query = 'INSERT INTO accounts (email, fname, lname, phone, birthday, gender, password) VALUES (:email, :firstname, :lastname, :phone, :birthday, :gender, :password)';
     $statement = $db->prepare($query);
-    $statement->bindValue(":ownerOD", $ownerID);
+    $statement->bindValue(":email", $email);
+    $statement->bindValue(":firstname", $fname);
+    $statement->bindValue(":lastname", $lname);
+    $statement->bindValue(":phone", $phone);
+    $statement->bindValue(":birthday", $birthday);
+    $statement->bindValue(":gender", $gender);
+    $statement->bindValue(":password", $password);
     $statement->execute();
-    $table = $statement->fetchAll();
     $statement->closeCursor();
-    return $table;
 }
+
 ?
