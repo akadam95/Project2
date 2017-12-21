@@ -35,3 +35,19 @@ function updateTodo($id, $duedate, $message) {
     $statement->execute();
     $statement->closeCursor();
 }
+
+function newTask($email, $ownerID, $duedate, $message) {
+    global $db;
+    date_default_timezone_set("America/New_York");
+    $datetime = date("Y-m-d H:i:sa");
+    $query = 'INSERT INTO todos (owneremail, ownerid, createddate, duedate, message, isdone) VALUES (:email, :ownerid, :createddate, :duedate, :message, :isdone)';
+    $statement = $db->prepare($query);
+    $statement->bindValue(":email", $email);
+    $statement->bindValue(":ownerid", $ownerID);
+    $statement->bindValue(":createddate", $datetime);
+    $statement->bindValue(":duedate", $duedate);
+    $statement->bindValue(":message", $message);
+    $statement->bindValue(":isdone", 0);
+    $statement->execute();
+    $statement->closeCursor();
+}
