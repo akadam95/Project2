@@ -42,4 +42,18 @@ function getFname($email, $password) {
     return $fname;
 }
 
+function getLname($email, $password) {
+    global $db;
+    $query = 'SELECT * FROM accounts
+              WHERE email = :email AND password = :password';
+    $statement = $db->prepare($query);
+    $statement->bindValue(":email", $email);
+    $statement->bindValue(":password", $password);
+    $statement->execute();
+    $lnames = $statement->fetch();
+    $statement->closeCursor();
+    $lnames = $account['lname'];
+    return $lnames;
+}
+
 ?
